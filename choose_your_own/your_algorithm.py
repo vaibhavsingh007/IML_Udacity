@@ -31,12 +31,20 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
+from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+#clf = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1),
+#                         algorithm="SAMME",
+#                         n_estimators=200)     # acc=.924
+clf = KNeighborsClassifier(n_neighbors=3)      # acc=.936
+#clf = RandomForestClassifier(max_depth=2, random_state=0)   #.92
 
 
-
-
-
-
+clf.fit(features_train, labels_train)
+print(accuracy_score(labels_test, clf.predict(features_test)))
 
 try:
     prettyPicture(clf, features_test, labels_test)
