@@ -47,7 +47,8 @@ data_dict.pop("TOTAL", 0)
 ### the input features we want to use 
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
 feature_1 = "salary"
-feature_2 = "exercised_stock_options"
+feature_2 = "from_messages" #"exercised_stock_options"
+#feature_3 = "total_payments"
 poi  = "poi"
 features_list = [poi, feature_1, feature_2]
 data = featureFormat(data_dict, features_list )
@@ -56,7 +57,7 @@ poi, finance_features = targetFeatureSplit( data )
 
 ### in the "clustering with 3 features" part of the mini-project,
 ### you'll want to change this line to 
-### for f1, f2, _ in finance_features:
+#for f1, f2, f3 in finance_features:
 ### (as it's currently written, the line below assumes 2 features)
 for f1, f2 in finance_features:
     plt.scatter( f1, f2 )
@@ -64,9 +65,22 @@ plt.show()
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import MinMaxScaler
+scaler1 = MinMaxScaler()
+scaler2 = MinMaxScaler()
+#finance_features = scaler.fit_transform(finance_features)
+s1 = scaler1.fit(numpy.array([[x[0]] for x in finance_features]))
+s2 = scaler2.fit(numpy.array([[x[1]] for x in finance_features]))
+print(s1.transform(numpy.array([[200000.]])))
+print(s2.transform(numpy.array([[1000000.]])))
+pred = KMeans(n_clusters=2, random_state=170).fit_predict(finance_features)
 
-
-
+# Find max and min values of feature_2
+max_val = max([v[feature_1] for v in data_dict.itervalues() if v[feature_1] != "NaN"])
+min_val = min([v[feature_1] for v in data_dict.itervalues() if v[feature_1] != "NaN"])
+print(max_val, min_val)
+# (34348384, 3285)
 
 ### rename the "name" parameter when you change the number of features
 ### so that the figure gets saved to a different file
