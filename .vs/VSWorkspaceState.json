@@ -1,9 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\naive_bayes",
+    "\\decision_tree",
+    "\\feature_selection",
+    "\\k_means",
+    "\\svm",
+    "\\text_learning",
     "\\tools"
   ],
-  "SelectedNode": "\\tools\\email_preprocess.py",
+  "SelectedNode": "\\feature_selection\\find_signature.py",
   "PreviewInSolutionExplorer": false
 }

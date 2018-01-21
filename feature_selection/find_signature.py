@@ -13,7 +13,12 @@ authors_file = "../text_learning/your_email_authors.pkl"
 word_data = pickle.load( open(words_file, "r"))
 authors = pickle.load( open(authors_file, "r") )
 
-
+#from sklearn.feature_extraction.text import TfidfVectorizer
+#vectorizer = TfidfVectorizer(#sublinear_tf=True, max_df=0.5,
+#                             stop_words='english')
+#transformed_word_data = vectorizer.fit_transform(word_data)
+#vocab_list = vectorizer.get_feature_names()
+#print(vocab_list[34597])
 
 ### test_size is the percentage of events assigned to the test set (the
 ### remainder go into training)
@@ -43,6 +48,15 @@ from sklearn.metrics import accuracy_score
 clf = tree.DecisionTreeClassifier()
 clf.fit(features_train, labels_train)
 
-print(accuracy_score(labels_train, clf.predict(features_test)))
+print(accuracy_score(labels_train, clf.predict(features_train)))
 print(accuracy_score(labels_test, clf.predict(features_test)))
+
+# Feature importances (max)
+highly_weighted_features = [(i,x) for (i,x) in enumerate(clf.feature_importances_) if x > 0.2]
+print(highly_weighted_features)
+# [(33614, 0.7647058823529412)]
+
+print([(i,x) for (i,x) in enumerate(vectorizer.get_feature_names()) if i in [i1[0] for i1 in highly_weighted_features]])
+# sshacklensf
+
 
