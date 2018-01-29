@@ -1,13 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\decision_tree",
-    "\\feature_selection",
-    "\\k_means",
-    "\\svm",
-    "\\text_learning",
-    "\\tools"
+    "\\pca"
   ],
-  "SelectedNode": "\\feature_selection\\find_signature.py",
+  "SelectedNode": "\\pca\\eigenfaces.py",
   "PreviewInSolutionExplorer": false
 }
